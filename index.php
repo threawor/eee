@@ -1,101 +1,68 @@
 <?php
 $time = date('d.m.Y H:i');
 
-// Анекдоты по темам
+// Анекдоты — по одному на тему
 $jokes = [
-    'Смерть и похороны' => [
-        "— Доктор, я умру?\n— Ну, все там будем.\n— А конкретнее?\n— Конкретнее — завтра в 14:30. Приходите, я вам скидку сделаю.",
-        "Умирает мужик и говорит жене:\n— Дорогая, я хочу, чтобы на моих похоронах играл джаз.\n— Хорошо, милый.\n— И чтобы все танцевали.\n— Хорошо.\n— И чтобы ты через год вышла замуж за моего брата.\n— Хорошо... А зачем?\n— Чтобы он тоже помучился.",
-        "— Как дела?\n— Как у покойника.\n— В смысле?\n— Никак. Но все делают вид, что я тут.",
-        "Приходит мужик к гробовщику:\n— Сколько стоит похоронить тёщу?\n— От 20 тысяч.\n— А если по акции?\n— У нас акции только на оптовые заказы.",
-        "Врач пациенту:\n— У меня для вас две новости: хорошая и плохая.\n— Давайте хорошую.\n— Вам осталось жить два дня.\n— А плохая?\n— Я забыл вам сказать это вчера.",
-        "На кладбище один мужик другому:\n— Слушай, а чё ты мне не звонишь?\n— Да я занят всё время.\n— Чем?\n— Да вот, лежу.",
-    ],
+    'Смерть'      => "— Доктор, я умру?\n— Ну, все там будем.\n— А конкретнее?\n— Конкретнее — завтра в 14:30. Приходите, скидку сделаю.",
+    'Работа'      => "Начальник:\n— Почему уходите в 18:00, если работы ещё на три часа?\n— Потому что если останусь, работы станет на пять.",
+    'Семья'       => "Жена мужу:\n— Дорогой, я хочу, чтобы наши отношения стали глубже.\n— Хорошо, я выкопаю яму. Насколько глубоко?",
+    'Медицина'    => "— Доктор, у меня всё болит. Куда ни нажму — везде больно.\n— У вас сломан палец.",
+    'Деньги'      => "— Как стать миллионером?\n— Начните миллиардером и работайте над собой.",
+    'Политика'    => "— Что общего у политика и подгузника?\n— Оба должны меняться регулярно. И оба воняют.",
+    'IT'          => "— Почему программисты не боятся смерти?\n— У них есть бэкапы. Правда, они их лет пять не проверяли.",
+];
 
-    'Работа и офис' => [
-        "Начальник подчинённому:\n— Почему вы уходите в 18:00, если работы ещё на три часа?\n— Потому что если я останусь, работы станет на пять.",
-        "— Сколько программистов нужно, чтобы вкрутить лампочку?\n— Ни одного. Это аппаратная проблема.",
-        "Объявление: «Требуется сотрудник с зарплатой от 30 000. Умение читать мысли работодателя обязательно.»",
-        "HR на собеседовании:\n— Где вы видите себя через 5 лет?\n— На вашем месте.\n— Отлично, вы приняты. Мне как раз нужен человек с амбициями, который меня заменит, когда я уйду на пенсию. Через 40 лет.",
-        "— Как понять, что начальник врёт?\n— Он открывает рот.",
-        "Мужик приходит устраиваться на кладбище сторожем.\n— Опыт есть?\n— Да, 20 лет в офисе просидел.",
-        "На работе повесили объявление: «Курить запрещено». Курильщики повесили рядом: «Умирать тоже, но мы же не запрещаем.»",
+// Викторина — вопрос + варианты + правильный индекс + подпись мема
+$quiz = [
+    [
+        'question' => 'Что говорит программист, когда код работает, но он не знает почему?',
+        'options'  => ['«Не трогай, оно живое»', '«Всё по плану»', '«Я гений»', '«Задеплоим в пятницу»'],
+        'correct'  => 0,
+        'meme_top' => 'It works',
+        'meme_bot' => 'on my machine',
     ],
-
-    'Семья и брак' => [
-        "Жена мужу:\n— Дорогой, я хочу, чтобы наши отношения стали глубже.\n— Хорошо, я выкопаю яму. Насколько глубоко?",
-        "— Дорогая, я тебя люблю.\n— И я тебя.\n— А теперь давай честно: кто из нас двоих врёт лучше?",
-        "Разводятся муж с женой. Судья:\n— По какой причине?\n— Она меня доводит.\n— Как именно?\n— Она жива.",
-        "Жена:\n— Ты меня совсем не слушаешь!\nМуж:\n— Извини, что ты сказала?",
-        "— Сынок, ты когда женишься?\n— Мам, ну куда мне жениться, у меня даже девушки нет.\n— Вот и женись, пока есть время. Потом она появится, и будет поздно.",
-        "Мужик возвращается домой с рыбалки. Жена:\n— Ну как, поймал что-нибудь?\n— Да, тебя нет уже три дня, и это лучшее, что со мной случилось.",
+    [
+        'question' => 'Понедельник. Ты открываешь рабочую почту и видишь 47 писем. Твоя реакция?',
+        'options'  => ['Отвечу все', 'Закрою и сделаю вид, что не видел', 'Уволюсь', 'Перешлю начальнику'],
+        'correct'  => 1,
+        'meme_top' => 'I see no',
+        'meme_bot' => 'differences',
     ],
-
-    'Медицина' => [
-        "— Доктор, у меня всё болит. Куда ни нажму — везде больно.\n— У вас сломан палец.",
-        "Врач пациенту:\n— Мне нужно вас предупредить: операция будет сложной. Но у нас есть практикант, он впервые.\n— А можно без практиканта?\n— Конечно можно. Но тогда кто будет оперировать?",
-        "— Доктор, я буду жить?\n— А смысл?",
-        "Пациент:\n— Доктор, мне кажется, я схожу с ума.\n— Не преувеличивайте. Просто принимайте эти таблетки, и всё пройдёт.\n— А если не пройдёт?\n— Тогда мы вас изолируем. Шучу. Или нет.",
-        "В морге санитар новичку:\n— Главное правило: не разговаривай с клиентами.\n— А они отвечают?\n— Нет, но ты можешь привыкнуть, и на собеседовании в дурдоме будет неловко.",
-        "— Что вы чувствуете, когда смотрите на рентген?\n— Профессиональный интерес.\n— А конкретнее?\n— Что вам осталось два дня, а вы всё ещё здесь.",
+    [
+        'question' => 'Сколько нужно сеньоров, чтобы пофиксить баг в проде?',
+        'options'  => ['Один', 'Два', 'Ни одного — это фича', 'Все, но завтра'],
+        'correct'  => 2,
+        'meme_top' => 'Its not a bug',
+        'meme_bot' => 'its a feature',
     ],
-
-    'Деньги и бедность' => [
-        "— Как стать миллионером?\n— Начните миллиардером и работайте над собой.",
-        "Бедный студент молится:\n— Господи, пошли мне денег.\nГолос сверху:\n— Пошлю. Но не почтой.",
-        "— Почему ты такой бедный?\n— Потому что родился в правильной стране, но не в правильной семье.",
-        "Два бомжа находят кошелёк. Один:\n— Тут 100 рублей.\nВторой:\n— Отлично, теперь мы богатые.\n— Ага, теперь мы богатые бомжи. Это как-то престижнее, что ли.",
-        "— У меня нет денег.\n— А ты пробовал не быть бедным?\n— Пробовал, дорого выходит.",
-        "Инфляция — это когда ты приходишь в магазин с зарплатой, а выходишь с чеком и слезами.",
-    ],
-
-    'Политика и власть' => [
-        "— Как отличить политика от обычного человека?\n— Обычный человек врёт бесплатно, а политик — за наши деньги.",
-        "Выборы — это когда народ выбирает между плохим и очень плохим, а потом удивляется, что стало ещё хуже.",
-        "— Что общего у политика и подгузника?\n— Оба должны меняться регулярно. И оба воняют.",
-        "Депутат депутату:\n— Слушай, а как ты объясняешь народу, что зарплата у тебя в 10 раз больше?\n— Легко. Говорю: «Я работаю в 10 раз больше». И народ верит, потому что я работаю над этим.",
-        "— Почему в стране всё плохо?\n— Потому что хорошие люди сидят дома и думают, что кто-то другой всё исправит.\n— А кто исправляет?\n— Никто. Все думают.",
-        "Президент народу: «Всё будет хорошо». Народ: «А когда?» Президент: «А это уже не ко мне, это к следующему.»",
-    ],
-
-    'Армия и служба' => [
-        "— Рядовой, почему у вас сапоги нечищеные?\n— Потому что я служу в авиации, товарищ прапорщик.\n— И что?\n— А мы должны не сапоги чистить, а летать. Летать чищеными сапогами, конечно, приятнее, но не обязательно.",
-        "Прапорщик солдатам:\n— Сегодня у нас марш-бросок 30 километров.\nСолдат:\n— Товарищ прапорщик, а можно 29?\n— Можно. Но тогда 1 километр будете бежать на 30 минут дольше.",
-        "— Как дела в армии?\n— Отлично. Уже три месяца никто не умирал.\n— А раньше?\n— А раньше я ещё не служил.",
-        "Новобранец:\n— Товарищ сержант, а правда, что в армии кормят плохо?\n— Неправда. В армии кормят очень хорошо. Просто мало и редко.",
-        "Военный врач:\n— Рядовой, вы симулируете!\n— Никак нет, товарищ полковник. Я просто не хочу быть здоровым в такой стране.",
-    ],
-
-    'Психология и сумасшествие' => [
-        "Психиатр пациенту:\n— Ну что, как вы себя чувствуете?\n— Отлично! Я больше не думаю, что я Наполеон.\n— Прекрасно! А когда вы это поняли?\n— Когда Жозефина сбежала с Кутузовым.",
-        "— Доктор, у меня раздвоение личности.\n— Хорошо, присаживайтесь.\n— Спасибо, я постою. Мы постоим. Я постою.",
-        "Пациент:\n— Доктор, мне кажется, я стал невидимым.\nВрач:\n— Кто это сказал?!\nПациент:\n— Ой, извините, уже ухожу.",
-        "— Доктор, у меня мания величия.\n— Не преувеличивайте. У вас просто отличная самооценка.\n— Спасибо, доктор. Вы, кстати, тоже ничего. Но не я.",
-        "В дурдоме объявили конкурс «Кто лучше всех сыграет нормального?». Победил санитар.",
-    ],
-
-    'Технологии и интернет' => [
-        "— Почему программисты не боятся смерти?\n— Потому что у них есть бэкапы. Правда, они не проверяли их лет пять.",
-        "Пользователь в поддержку:\n— У меня не работает интернет.\n— Проверьте, включён ли кабель.\n— Включён.\n— Проверьте роутер.\n— Проверен.\n— Проверьте, есть ли у вас вообще компьютер.\n— ...Я звоню из-за стола с бумагами. Компьютер сгорел три года назад.",
-        "— Что будет, если отключить интернет на день?\n— Люди выйдут на улицу и увидят, что там страшнее, чем в новостной ленте.",
-        "Бот в чате:\n— Здравствуйте! Чем могу помочь?\n— Скажи что-нибудь умное.\n— Как отключить бота.",
-        "— Сколько нужно IT-специалистов, чтобы починить сервер?\n— Один, но он должен быть на месте. А он в отпуске. А сервер — нет.",
+    [
+        'question' => 'Что делает студент за день до экзамена?',
+        'options'  => ['Учит', 'Спит', 'Учит других', 'Начинает учить'],
+        'correct'  => 3,
+        'meme_top' => 'Procrastination',
+        'meme_bot' => 'level 100',
     ],
 ];
 
-// Выбор темы (GET-параметр или случайная)
-$topics = array_keys($jokes);
-$currentTopic = $_GET['topic'] ?? $topics[array_rand($topics)];
-if (!isset($jokes[$currentTopic])) {
-    $currentTopic = $topics[0];
-}
-$joke = $jokes[$currentTopic][array_rand($jokes[$currentTopic])];
+// Логика викторины
+$quizIndex  = isset($_GET['q']) ? (int)$_GET['q'] : 0;
+$quizIndex  = max(0, min($quizIndex, count($quiz) - 1));
+$answer     = $_GET['answer'] ?? null;
+$current    = $quiz[$quizIndex];
+$answered   = $answer !== null;
+$isCorrect  = $answered && (int)$answer === $current['correct'];
+
+// Анекдот дня — привязан к дате
+$topics     = array_keys($jokes);
+$dayIndex   = (int)date('z') % count($topics);
+$todayTopic = $topics[$dayIndex];
+$joke       = $jokes[$todayTopic];
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>😈 Чёрный юмор</title>
+    <title>😈 Чёрный юмор + Мемы</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -105,18 +72,13 @@ $joke = $jokes[$currentTopic][array_rand($jokes[$currentTopic])];
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             color: #e0e0e0;
             padding: 40px 20px;
-            display: flex;
-            justify-content: center;
         }
 
-        .container {
-            max-width: 850px;
-            width: 100%;
-        }
+        .container { max-width: 900px; margin: 0 auto; }
 
         h1 {
             text-align: center;
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             margin-bottom: 10px;
             background: linear-gradient(90deg, #ff6b6b, #c44569, #ff6b6b);
             background-size: 200% auto;
@@ -126,68 +88,33 @@ $joke = $jokes[$currentTopic][array_rand($jokes[$currentTopic])];
             animation: shine 4s linear infinite;
         }
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
+        @keyframes shine { to { background-position: 200% center; } }
 
         .subtitle {
             text-align: center;
             color: #888;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             font-size: 0.95rem;
         }
 
-        /* Вкладки тем */
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .tab {
-            padding: 10px 18px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 12px;
-            color: #bbb;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.25s ease;
-        }
-
-        .tab:hover {
-            background: rgba(255, 107, 107, 0.2);
-            color: #fff;
-            border-color: rgba(255, 107, 107, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .tab.active {
-            background: linear-gradient(135deg, #ff6b6b, #c44569);
-            color: #fff;
-            border-color: transparent;
-            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-        }
-
-        /* Карточка анекдота */
-        .joke-card {
+        /* Общий стиль карточек */
+        .card {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 45px 50px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 22px;
+            padding: 35px 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             animation: fadeIn 0.6s ease-out;
             position: relative;
             overflow: hidden;
         }
 
-        .joke-card::before {
+        .card::before {
             content: '';
             position: absolute;
             top: 0; left: 0;
-            width: 6px; height: 100%;
+            width: 5px; height: 100%;
             background: linear-gradient(180deg, #ff6b6b, #c44569);
         }
 
@@ -196,40 +123,111 @@ $joke = $jokes[$currentTopic][array_rand($jokes[$currentTopic])];
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        .topic-label {
-            font-size: 0.8rem;
+        .label {
+            font-size: 0.75rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: #ff6b6b;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             font-weight: 700;
         }
 
         .joke-text {
-            font-size: 1.25rem;
-            line-height: 1.75;
+            font-size: 1.2rem;
+            line-height: 1.7;
             white-space: pre-line;
             color: #e8e8e8;
         }
 
-        /* Кнопки действий */
+        /* Викторина */
+        .question {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            margin-bottom: 22px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .options {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .option {
+            display: block;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            color: #ddd;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+        }
+
+        .option:hover {
+            background: rgba(255, 107, 107, 0.18);
+            border-color: rgba(255, 107, 107, 0.5);
+            color: #fff;
+            transform: translateX(4px);
+        }
+
+        .option.correct {
+            background: rgba(76, 175, 80, 0.25);
+            border-color: #4caf50;
+            color: #b9f6ca;
+        }
+
+        .option.wrong {
+            background: rgba(244, 67, 54, 0.22);
+            border-color: #f44336;
+            color: #ffcdd2;
+        }
+
+        .option.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .result {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .result.ok  { color: #4caf50; }
+        .result.bad { color: #f44336; }
+
+        /* Мем */
+        .meme-wrap {
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .meme-wrap img {
+            max-width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Кнопки */
         .actions {
             display: flex;
             gap: 12px;
             justify-content: center;
-            margin-top: 30px;
             flex-wrap: wrap;
         }
 
         .btn {
-            padding: 14px 28px;
+            padding: 13px 26px;
             border-radius: 12px;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.98rem;
             font-weight: 600;
             transition: all 0.25s ease;
-            border: none;
-            cursor: pointer;
             display: inline-block;
         }
 
@@ -262,48 +260,84 @@ $joke = $jokes[$currentTopic][array_rand($jokes[$currentTopic])];
             font-size: 0.85rem;
         }
 
-        .warning {
+        .progress {
             text-align: center;
-            color: #666;
-            font-size: 0.8rem;
-            margin-top: 8px;
-            font-style: italic;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>😈 Чёрный юмор</h1>
-        <p class="subtitle">Смешно, пока не подумаешь. А потом уже поздно.</p>
+        <h1>😈 Чёрный юмор + Мемы</h1>
+        <p class="subtitle">Анекдот дня и викторина, где неправильный ответ тоже смешной.</p>
 
-        <!-- Вкладки тем -->
-        <div class="tabs">
-            <?php foreach ($topics as $t): ?>
-                <a href="?topic=<?= urlencode($t) ?>"
-                   class="tab <?= $t === $currentTopic ? 'active' : '' ?>">
-                    <?= htmlspecialchars($t) ?>
-                </a>
-            <?php endforeach; ?>
-        </div>
-
-        <!-- Карточка анекдота -->
-        <div class="joke-card">
-            <div class="topic-label"><?= htmlspecialchars($currentTopic) ?></div>
+        <!-- Анекдот дня -->
+        <div class="card">
+            <div class="label">😹 Анекдот дня — <?= htmlspecialchars($todayTopic) ?></div>
             <div class="joke-text"><?= htmlspecialchars($joke) ?></div>
         </div>
 
-        <!-- Кнопки -->
+        <!-- Викторина -->
+        <div class="card">
+            <div class="label">🎯 Викторина с мемами</div>
+
+            <div class="progress">Вопрос <?= $quizIndex + 1 ?> из <?= count($quiz) ?></div>
+
+            <div class="question"><?= htmlspecialchars($current['question']) ?></div>
+
+            <?php if ($answered): ?>
+                <div class="result <?= $isCorrect ? 'ok' : 'bad' ?>">
+                    <?= $isCorrect ? '✅ Верно! Ты умён. Пока что.' : '❌ Мимо. Но мем всё равно твой.' ?>
+                </div>
+            <?php endif; ?>
+
+            <div class="options">
+                <?php foreach ($current['options'] as $i => $opt): ?>
+                    <?php
+                        $cls = 'option';
+                        if ($answered) {
+                            $cls .= ' disabled';
+                            if ($i === $current['correct']) $cls .= ' correct';
+                            elseif ($i === (int)$answer)      $cls .= ' wrong';
+                        }
+                    ?>
+                    <?php if (!$answered): ?>
+                        <a href="?q=<?= $quizIndex ?>&answer=<?= $i ?>" class="<?= $cls ?>">
+                            <?= htmlspecialchars($opt) ?>
+                        </a>
+                    <?php else: ?>
+                        <div class="<?= $cls ?>"><?= htmlspecialchars($opt) ?></div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Мем показывается после ответа -->
+            <?php if ($answered): ?>
+                <div class="meme-wrap">
+                    <img src="https://api.memegen.link/images/custom/<?= urlencode($current['meme_top']) ?>/<?= urlencode($current['meme_bot']) ?>.png?background=https://i.imgflip.com/1ur9b0.jpg&width=600"
+                         alt="Мем">
+                </div>
+            <?php endif; ?>
+
+            <div class="actions" style="margin-top:25px;">
+                <?php if (!$answered): ?>
+                    <a href="?q=<?= $quizIndex ?>" class="btn btn-secondary">🤷 Пропустить</a>
+                <?php else: ?>
+                    <a href="?q=<?= ($quizIndex + 1) % count($quiz) ?>" class="btn btn-primary">
+                        ➡️ Следующий вопрос
+                    </a>
+                    <a href="?q=<?= $quizIndex ?>" class="btn btn-secondary">🔁 Ещё раз</a>
+                <?php endif; ?>
+            </div>
+        </div>
+
         <div class="actions">
-            <a href="?topic=<?= urlencode($currentTopic) ?>" class="btn btn-primary">
-                🎲 Ещё из этой темы
-            </a>
-            <a href="?" class="btn btn-secondary">
-                🎯 Случайная тема
-            </a>
+            <a href="?" class="btn btn-secondary">🏠 С начала</a>
         </div>
 
         <p class="meta">Работает на PHP <?= PHP_VERSION ?> • <?= $time ?></p>
-        <p class="warning">Не воспринимайте всерьёз. Юмор — защитная реакция психики.</p>
     </div>
 </body>
 </html>
