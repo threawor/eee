@@ -1,179 +1,309 @@
 <?php
-$message = "Привет, мир!";
 $time = date('d.m.Y H:i');
 
-// Случайный большой кот
-$cats = ['🐱', '😺', '😸', '😻', '🐈', '🐈‍⬛', '😼', '😽'];
-$cat = $cats[array_rand($cats)];
-
-// Анекдоты дня
+// Анекдоты по темам
 $jokes = [
-    "— Мяу.\n— Мяу-мяу.\n— Ага, понял. (разговор двух котов, очень содержательный)",
-    "Кот сидит на дереве и кричит:\n— Снимите меня!\n— А как ты туда залез?\n— Я не залезал, я тут родился!",
-    "— Почему коты всегда падают на лапы?\n— Потому что у них нет выбора — на спину больно.",
-    "Приходит кот к ветеринару:\n— Доктор, у меня проблема: я всё время гоняюсь за лазерной точкой.\n— И давно это с вами?\n— С тех пор, как хозяин купил указку... ААА! ВОН ОНА! (убегает)",
-    "— Как отличить кота от кошки?\n— По паспорту. Или спросить. Но лучше не спрашивать — обидятся.",
-    "Кот заходит в бар и говорит:\n— Мне, пожалуйста, молока.\nБармен:\n— У нас нет молока.\nКот выходит. Через минуту заходит снова:\n— Мне, пожалуйста, молока.\nБармен:\n— Я же сказал, нет у нас молока!\nКот:\n— А теперь?",
-    "Сидит кот на подоконнике, смотрит в окно. Хозяин спрашивает:\n— О чём думаешь?\nКот:\n— Ни о чём. У меня отпуск.",
+    'Смерть и похороны' => [
+        "— Доктор, я умру?\n— Ну, все там будем.\n— А конкретнее?\n— Конкретнее — завтра в 14:30. Приходите, я вам скидку сделаю.",
+        "Умирает мужик и говорит жене:\n— Дорогая, я хочу, чтобы на моих похоронах играл джаз.\n— Хорошо, милый.\n— И чтобы все танцевали.\n— Хорошо.\n— И чтобы ты через год вышла замуж за моего брата.\n— Хорошо... А зачем?\n— Чтобы он тоже помучился.",
+        "— Как дела?\n— Как у покойника.\n— В смысле?\n— Никак. Но все делают вид, что я тут.",
+        "Приходит мужик к гробовщику:\n— Сколько стоит похоронить тёщу?\n— От 20 тысяч.\n— А если по акции?\n— У нас акции только на оптовые заказы.",
+        "Врач пациенту:\n— У меня для вас две новости: хорошая и плохая.\n— Давайте хорошую.\n— Вам осталось жить два дня.\n— А плохая?\n— Я забыл вам сказать это вчера.",
+        "На кладбище один мужик другому:\n— Слушай, а чё ты мне не звонишь?\n— Да я занят всё время.\n— Чем?\n— Да вот, лежу.",
+    ],
+
+    'Работа и офис' => [
+        "Начальник подчинённому:\n— Почему вы уходите в 18:00, если работы ещё на три часа?\n— Потому что если я останусь, работы станет на пять.",
+        "— Сколько программистов нужно, чтобы вкрутить лампочку?\n— Ни одного. Это аппаратная проблема.",
+        "Объявление: «Требуется сотрудник с зарплатой от 30 000. Умение читать мысли работодателя обязательно.»",
+        "HR на собеседовании:\n— Где вы видите себя через 5 лет?\n— На вашем месте.\n— Отлично, вы приняты. Мне как раз нужен человек с амбициями, который меня заменит, когда я уйду на пенсию. Через 40 лет.",
+        "— Как понять, что начальник врёт?\n— Он открывает рот.",
+        "Мужик приходит устраиваться на кладбище сторожем.\n— Опыт есть?\n— Да, 20 лет в офисе просидел.",
+        "На работе повесили объявление: «Курить запрещено». Курильщики повесили рядом: «Умирать тоже, но мы же не запрещаем.»",
+    ],
+
+    'Семья и брак' => [
+        "Жена мужу:\n— Дорогой, я хочу, чтобы наши отношения стали глубже.\n— Хорошо, я выкопаю яму. Насколько глубоко?",
+        "— Дорогая, я тебя люблю.\n— И я тебя.\n— А теперь давай честно: кто из нас двоих врёт лучше?",
+        "Разводятся муж с женой. Судья:\n— По какой причине?\n— Она меня доводит.\n— Как именно?\n— Она жива.",
+        "Жена:\n— Ты меня совсем не слушаешь!\nМуж:\n— Извини, что ты сказала?",
+        "— Сынок, ты когда женишься?\n— Мам, ну куда мне жениться, у меня даже девушки нет.\n— Вот и женись, пока есть время. Потом она появится, и будет поздно.",
+        "Мужик возвращается домой с рыбалки. Жена:\n— Ну как, поймал что-нибудь?\n— Да, тебя нет уже три дня, и это лучшее, что со мной случилось.",
+    ],
+
+    'Медицина' => [
+        "— Доктор, у меня всё болит. Куда ни нажму — везде больно.\n— У вас сломан палец.",
+        "Врач пациенту:\n— Мне нужно вас предупредить: операция будет сложной. Но у нас есть практикант, он впервые.\n— А можно без практиканта?\n— Конечно можно. Но тогда кто будет оперировать?",
+        "— Доктор, я буду жить?\n— А смысл?",
+        "Пациент:\n— Доктор, мне кажется, я схожу с ума.\n— Не преувеличивайте. Просто принимайте эти таблетки, и всё пройдёт.\n— А если не пройдёт?\n— Тогда мы вас изолируем. Шучу. Или нет.",
+        "В морге санитар новичку:\n— Главное правило: не разговаривай с клиентами.\n— А они отвечают?\n— Нет, но ты можешь привыкнуть, и на собеседовании в дурдоме будет неловко.",
+        "— Что вы чувствуете, когда смотрите на рентген?\n— Профессиональный интерес.\n— А конкретнее?\n— Что вам осталось два дня, а вы всё ещё здесь.",
+    ],
+
+    'Деньги и бедность' => [
+        "— Как стать миллионером?\n— Начните миллиардером и работайте над собой.",
+        "Бедный студент молится:\n— Господи, пошли мне денег.\nГолос сверху:\n— Пошлю. Но не почтой.",
+        "— Почему ты такой бедный?\n— Потому что родился в правильной стране, но не в правильной семье.",
+        "Два бомжа находят кошелёк. Один:\n— Тут 100 рублей.\nВторой:\n— Отлично, теперь мы богатые.\n— Ага, теперь мы богатые бомжи. Это как-то престижнее, что ли.",
+        "— У меня нет денег.\n— А ты пробовал не быть бедным?\n— Пробовал, дорого выходит.",
+        "Инфляция — это когда ты приходишь в магазин с зарплатой, а выходишь с чеком и слезами.",
+    ],
+
+    'Политика и власть' => [
+        "— Как отличить политика от обычного человека?\n— Обычный человек врёт бесплатно, а политик — за наши деньги.",
+        "Выборы — это когда народ выбирает между плохим и очень плохим, а потом удивляется, что стало ещё хуже.",
+        "— Что общего у политика и подгузника?\n— Оба должны меняться регулярно. И оба воняют.",
+        "Депутат депутату:\n— Слушай, а как ты объясняешь народу, что зарплата у тебя в 10 раз больше?\n— Легко. Говорю: «Я работаю в 10 раз больше». И народ верит, потому что я работаю над этим.",
+        "— Почему в стране всё плохо?\n— Потому что хорошие люди сидят дома и думают, что кто-то другой всё исправит.\n— А кто исправляет?\n— Никто. Все думают.",
+        "Президент народу: «Всё будет хорошо». Народ: «А когда?» Президент: «А это уже не ко мне, это к следующему.»",
+    ],
+
+    'Армия и служба' => [
+        "— Рядовой, почему у вас сапоги нечищеные?\n— Потому что я служу в авиации, товарищ прапорщик.\n— И что?\n— А мы должны не сапоги чистить, а летать. Летать чищеными сапогами, конечно, приятнее, но не обязательно.",
+        "Прапорщик солдатам:\n— Сегодня у нас марш-бросок 30 километров.\nСолдат:\n— Товарищ прапорщик, а можно 29?\n— Можно. Но тогда 1 километр будете бежать на 30 минут дольше.",
+        "— Как дела в армии?\n— Отлично. Уже три месяца никто не умирал.\n— А раньше?\n— А раньше я ещё не служил.",
+        "Новобранец:\n— Товарищ сержант, а правда, что в армии кормят плохо?\n— Неправда. В армии кормят очень хорошо. Просто мало и редко.",
+        "Военный врач:\n— Рядовой, вы симулируете!\n— Никак нет, товарищ полковник. Я просто не хочу быть здоровым в такой стране.",
+    ],
+
+    'Психология и сумасшествие' => [
+        "Психиатр пациенту:\n— Ну что, как вы себя чувствуете?\n— Отлично! Я больше не думаю, что я Наполеон.\n— Прекрасно! А когда вы это поняли?\n— Когда Жозефина сбежала с Кутузовым.",
+        "— Доктор, у меня раздвоение личности.\n— Хорошо, присаживайтесь.\n— Спасибо, я постою. Мы постоим. Я постою.",
+        "Пациент:\n— Доктор, мне кажется, я стал невидимым.\nВрач:\n— Кто это сказал?!\nПациент:\n— Ой, извините, уже ухожу.",
+        "— Доктор, у меня мания величия.\n— Не преувеличивайте. У вас просто отличная самооценка.\n— Спасибо, доктор. Вы, кстати, тоже ничего. Но не я.",
+        "В дурдоме объявили конкурс «Кто лучше всех сыграет нормального?». Победил санитар.",
+    ],
+
+    'Технологии и интернет' => [
+        "— Почему программисты не боятся смерти?\n— Потому что у них есть бэкапы. Правда, они не проверяли их лет пять.",
+        "Пользователь в поддержку:\n— У меня не работает интернет.\n— Проверьте, включён ли кабель.\n— Включён.\n— Проверьте роутер.\n— Проверен.\n— Проверьте, есть ли у вас вообще компьютер.\n— ...Я звоню из-за стола с бумагами. Компьютер сгорел три года назад.",
+        "— Что будет, если отключить интернет на день?\n— Люди выйдут на улицу и увидят, что там страшнее, чем в новостной ленте.",
+        "Бот в чате:\n— Здравствуйте! Чем могу помочь?\n— Скажи что-нибудь умное.\n— Как отключить бота.",
+        "— Сколько нужно IT-специалистов, чтобы починить сервер?\n— Один, но он должен быть на месте. А он в отпуске. А сервер — нет.",
+    ],
 ];
-$joke = $jokes[array_rand($jokes)];
+
+// Выбор темы (GET-параметр или случайная)
+$topics = array_keys($jokes);
+$currentTopic = $_GET['topic'] ?? $topics[array_rand($topics)];
+if (!isset($jokes[$currentTopic])) {
+    $currentTopic = $topics[0];
+}
+$joke = $jokes[$currentTopic][array_rand($jokes[$currentTopic])];
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?= $message ?> 🐱</title>
+    <title>😈 Чёрный юмор</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
-            overflow: hidden;
-            position: relative;
-            padding: 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e0e0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
         }
 
-        /* Плавающие котики на фоне */
-        .floating-cat {
-            position: absolute;
-            font-size: 4rem;
-            opacity: 0.35;
-            animation: float 8s ease-in-out infinite;
-            pointer-events: none;
-        }
-        .floating-cat:nth-child(1) { top: 8%;  left: 5%;  animation-delay: 0s;   }
-        .floating-cat:nth-child(2) { top: 70%; left: 10%; animation-delay: 1.5s; }
-        .floating-cat:nth-child(3) { top: 15%; left: 88%; animation-delay: 3s;   }
-        .floating-cat:nth-child(4) { top: 78%; left: 80%; animation-delay: 4.5s; }
-        .floating-cat:nth-child(5) { top: 45%; left: 2%;  animation-delay: 2s;   }
-        .floating-cat:nth-child(6) { top: 50%; left: 94%; animation-delay: 5s;   }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50%      { transform: translateY(-35px) rotate(5deg); }
-        }
-
-        /* Карточка */
-        .card {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            border-radius: 32px;
-            padding: 50px 70px;
-            text-align: center;
-            box-shadow: 0 25px 70px rgba(255, 120, 120, 0.4);
-            animation: fadeIn 1s ease-out;
-            position: relative;
-            z-index: 2;
-            max-width: 700px;
-        }
-
-        .big-cat {
-            font-size: 9rem;
-            display: block;
-            margin-bottom: 10px;
-            line-height: 1;
-            animation: bounce 2s ease-in-out infinite;
-            filter: drop-shadow(0 10px 25px rgba(255, 100, 150, 0.5));
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50%      { transform: translateY(-20px) scale(1.12); }
+        .container {
+            max-width: 850px;
+            width: 100%;
         }
 
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, #ff6b9d, #c44569, #ff6b9d);
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ff6b6b, #c44569, #ff6b6b);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: shine 3s linear infinite;
+            animation: shine 4s linear infinite;
         }
 
         @keyframes shine {
             to { background-position: 200% center; }
         }
 
-        .joke-box {
-            background: rgba(255, 255, 255, 0.75);
-            border-left: 6px solid #ff6b9d;
-            border-radius: 14px;
-            padding: 22px 26px;
-            margin: 24px 0;
-            text-align: left;
-            box-shadow: 0 6px 20px rgba(200, 80, 130, 0.15);
-        }
-
-        .joke-title {
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #c44569;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .joke-text {
-            font-size: 1.05rem;
-            color: #4a2c3a;
-            line-height: 1.6;
-            white-space: pre-line;
-        }
-
-        .meta {
-            color: #6b4c4c;
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
             font-size: 0.95rem;
-            letter-spacing: 0.5px;
         }
 
-        .paws {
-            margin-top: 20px;
-            font-size: 1.6rem;
-            letter-spacing: 10px;
-            animation: pulse 2s ease-in-out infinite;
+        /* Вкладки тем */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 30px;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50%      { opacity: 0.5; }
+        .tab {
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            color: #bbb;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+
+        .tab:hover {
+            background: rgba(255, 107, 107, 0.2);
+            color: #fff;
+            border-color: rgba(255, 107, 107, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #ff6b6b, #c44569);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Карточка анекдота */
+        .joke-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 45px 50px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .joke-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 6px; height: 100%;
+            background: linear-gradient(180deg, #ff6b6b, #c44569);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(25px); }
+            from { opacity: 0; transform: translateY(20px); }
             to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .topic-label {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .joke-text {
+            font-size: 1.25rem;
+            line-height: 1.75;
+            white-space: pre-line;
+            color: #e8e8e8;
+        }
+
+        /* Кнопки действий */
+        .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b6b, #c44569);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ccc;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        .meta {
+            text-align: center;
+            margin-top: 30px;
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+        .warning {
+            text-align: center;
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
-    <!-- Плавающие котики на фоне -->
-    <div class="floating-cat">🐱</div>
-    <div class="floating-cat">😺</div>
-    <div class="floating-cat">🐈</div>
-    <div class="floating-cat">😻</div>
-    <div class="floating-cat">😸</div>
-    <div class="floating-cat">🐈‍⬛</div>
+    <div class="container">
+        <h1>😈 Чёрный юмор</h1>
+        <p class="subtitle">Смешно, пока не подумаешь. А потом уже поздно.</p>
 
-    <!-- Главная карточка -->
-    <div class="card">
-        <span class="big-cat"><?= $cat ?></span>
-        <h1><?= $message ?></h1>
+        <!-- Вкладки тем -->
+        <div class="tabs">
+            <?php foreach ($topics as $t): ?>
+                <a href="?topic=<?= urlencode($t) ?>"
+                   class="tab <?= $t === $currentTopic ? 'active' : '' ?>">
+                    <?= htmlspecialchars($t) ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
 
-        <div class="joke-box">
-            <div class="joke-title">😹 Анекдот дня</div>
+        <!-- Карточка анекдота -->
+        <div class="joke-card">
+            <div class="topic-label"><?= htmlspecialchars($currentTopic) ?></div>
             <div class="joke-text"><?= htmlspecialchars($joke) ?></div>
         </div>
 
+        <!-- Кнопки -->
+        <div class="actions">
+            <a href="?topic=<?= urlencode($currentTopic) ?>" class="btn btn-primary">
+                🎲 Ещё из этой темы
+            </a>
+            <a href="?" class="btn btn-secondary">
+                🎯 Случайная тема
+            </a>
+        </div>
+
         <p class="meta">Работает на PHP <?= PHP_VERSION ?> • <?= $time ?></p>
-        <div class="paws">🐾 🐾 🐾</div>
+        <p class="warning">Не воспринимайте всерьёз. Юмор — защитная реакция психики.</p>
     </div>
 </body>
 </html>
