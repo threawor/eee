@@ -8,7 +8,8 @@ $message = "Привет, мир!";
     <title><?= $message ?></title>
 </head>
 <body>
-    <h1><?= $message ?></h1>
+    
     <p>Сегодня: <?= date('d.m.Y H:i') ?></p>
+<h1><?= $message ?></h1>
 </body>
 </html>
